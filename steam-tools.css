@@ -1,0 +1,767 @@
+/* Основной контейнер-ссылка */
+.home-button {
+  position: fixed;        /* Кнопка фиксирована на экране */
+  top: 70px;             /* Отступ сверху */
+  right: 70px;           /* Отступ справа */
+  z-index: 1000;          /* Поверх всех элементов */
+  text-decoration: none;  /* Убираем подчёркивание у ссылки */
+}
+
+/* Обёртка для иконки — фон кнопки */
+.home-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%; /* Делаем круг */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(145deg, rgba(14, 22, 43, 0.85), rgba(30, 58, 138, 0.85)); /* Глянцево-синий фон */
+  backdrop-filter: blur(8px); /* Стеклянный эффект */
+  -webkit-backdrop-filter: blur(8px); /* Для Safari */
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),           /* Внешняя тень */
+    inset 0 1px 4px rgba(255, 255, 255, 0.1); /* Внутренний блеск */
+
+  transition: 
+    transform 0.2s ease, 
+    box-shadow 0.3s ease; /* Плавное наведение */
+}
+
+/* Hover-эффект при наведении */
+.home-icon-wrapper:hover {
+  transform: scale(1.08); /* Небольшое увеличение */
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.5),
+    inset 0 2px 6px rgba(255, 255, 255, 0.15); /* Усиленный блеск */
+}
+
+/* --- Стили для HTML (ОЧЕНЬ ВАЖНО для правильной работы высоты VH и %) --- */
+html {
+    height: 100%; /* Убедитесь, что html занимает всю высоту */
+}
+
+/* --- Стили для BODY (анимированный градиент) --- */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: white; /* Цвет текста по умолчанию */
+    
+    height: 100%; /* Добавлено: Body теперь тоже занимает всю высоту */
+    position: relative; /* Важно: для правильного z-index бликов и фона */
+    overflow: hidden; /* Скрывает полосы прокрутки для body, чтобы фон не "уезжал" */
+
+    /* Анимированный градиентный фон */
+    background: linear-gradient(
+        45deg,
+        #0c0e1a,
+        #1a1d33,
+        #0c0e1a,
+        #0d0f1c
+    );
+    background-size: 400% 400%;
+    animation: gradientAnimation 20s ease infinite;
+}
+
+/* Определение ключевых кадров для анимации градиента */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Контейнер для случайных бликов --- */
+#blinks-container {
+    position: fixed; /* Закрепляем контейнер на экране */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Помещаем под основной контент */
+    pointer-events: none; /* Блики не будут перехватывать клики */
+}
+
+/* Стили для отдельных бликов */
+.blink {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, rgba(139, 233, 253, 0.8) 0%, rgba(139, 233, 253, 0) 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    animation-fill-mode: forwards;
+}
+
+/* Определение ключевых кадров для анимации появления/исчезновения бликов */
+@keyframes fadeInOutBlink {
+    0% { opacity: 0; transform: scale(0); }
+    10% { opacity: 1; transform: scale(1); }
+    90% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0); }
+}
+
+/* --- НОВЫЕ СТИЛИ ДЛЯ ОБЕРТКИ СКРОЛЛИРУЕМОГО КОНТЕНТА --- */
+.scrollable-content-wrapper {
+    width: 100%;
+    height: 100vh; /* ИСПОЛЬЗУЙТЕ height: 100vh; чтобы контейнер занимал всю высоту окна */
+    /* Если 100vh вызывает проблемы с мобильными браузерами, попробуйте flex-grow: 1 на родителе и flex на body */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    overflow-y: auto; /* Разрешаем вертикальную прокрутку */
+    overflow-x: hidden; /* Скрываем горизонтальную прокрутку */
+    
+    position: relative;
+    z-index: 1; 
+}
+
+
+/* --- Ваши существующие стили header, tools-section, tool-card и т.д. (без изменений) --- */
+
+.header {
+    padding: 2rem;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.controls input,
+.controls select,
+.controls button {
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+}
+
+.controls input,
+.controls select {
+    background-color: #1e1e2f;
+    color: white;
+}
+
+.controls button {
+    background-color: #6246ea;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.controls button:hover {
+    background-color: #7a5cff;
+}
+.top-controls input#searchInput {
+    width: 300px;
+    max-width: 90vw;
+}
+
+.controls-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.top-controls,
+.bottom-controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#categorySelect {
+    background-color: #6246ea;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#categorySelect:hover {
+    background-color: #7a5cff;
+}
+
+.section-title {
+    color: #7b5ce8;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #7b5ce8;
+    display: inline-block;
+    text-align: left;
+    max-width: 1200px;
+    margin: 0 auto 1rem auto;
+    padding: 0 1rem;
+}
+
+.section-subtext {
+    text-align: left;
+    max-width: 1200px;
+    margin: 0 auto 2rem auto;
+    padding: 0 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #d1d5ff;
+}
+
+
+.tools-section {
+    padding: 3rem 2rem;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tool-card {
+  background: linear-gradient(145deg, #1e293b, #0f172a); /* Глянцевый градиент */
+    border-radius: 16px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(122, 92, 255, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    perspective: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 420px; /* делай больше при необходимости */
+}
+
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.tool-card .buttons {
+    margin-top: auto;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tool-card .tag {
+    align-self: flex-start;
+    white-space: nowrap;
+}
+
+.tool-card:hover {
+    transform: rotateX(3deg) rotateY(2deg) scale(1.02);
+    box-shadow: 0 0 30px rgba(122, 92, 255, 0.4);
+}
+
+.tool-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    z-index: 2;
+    position: relative;
+}
+
+.tool-card h3 {
+    margin: 0.2rem 0 0.5rem;
+    z-index: 2;
+    position: relative;
+}
+
+.tool-card p {
+    color: #c4c8ff;
+    font-size: 0.95rem;
+    z-index: 2;
+    position: relative;
+}
+
+.tool-card .tag {
+    background: #2e355a;
+    color: #9fa8da;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    display: inline-block;
+    margin-top: 0.8rem;
+    z-index: 2;
+    position: relative;
+}
+
+.tool-card .buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 2;
+    position: relative;
+}
+
+.tool-card .buttons a {
+    flex: 1;
+    text-align: center;
+    background: #6246ea;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.tool-card .buttons a:hover {
+    background: #7a5cff;
+}
+
+.tools-header {
+    max-width: 1200px;
+    margin: 0 auto 2rem auto;
+    padding: 0 1rem;
+}
+
+.section-title {
+    color: #7b5ce8;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #7b5ce8;
+    display: inline-block;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.section-subtext {
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #d1d5ff;
+}
+
+/* Light effect for cards */
+.light-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.1), transparent 60%);
+}
+
+.tool-card:hover .light-effect {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Квадратный фон для эмодзи, совпадает по цвету с тегом */
+.tool-card .icon {
+    position: relative;
+    font-size: 2.5rem;
+    margin-bottom: 0.7rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    background-color: #222f4b;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 5px rgba(46, 53, 90, 0.6);
+}
+
+/* Рамка/обводка эмодзи с эффектом выползания и поворота */
+.tool-card:hover .icon {
+    background-color: #6246ea;
+    box-shadow: 0 0 12px #7a5cff;
+    transform: translateZ(20px) translateX(6px) rotate(30deg);
+}
+
+/* Квадратный фон для тега (поддерживаем базовый стиль) */
+.tool-card .tag {
+    background: #2e355a;
+    color: #9fa8da;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    display: inline-block;
+    margin-top: 0.8rem;
+    z-index: 2;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+/* При наведении на карточку меняем цвет фона тега на синий */
+.tool-card:hover .tag {
+    background-color: #6246ea;
+    color: white;
+}
+
+/* Хедер сверху карты с анимацией появления */
+.tool-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 5px; /* Установил фиксированную высоту */
+    background: linear-gradient(to left, #7a5cff, #6246ea, #7a5cff);
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: width 0.4s ease, opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 3;
+    border-radius: 0 0 8px 8px;
+}
+
+/* При наведении расширяем хедер по ширине карты с анимацией */
+.tool-card:hover::after {
+    animation: headerExpand 0.4s ease forwards;
+}
+
+/* Добавим анимацию линии "из центра к краям" */
+@keyframes headerExpand {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    50% {
+        width: 50%;
+        opacity: 1;
+    }
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.2em;
+    }
+
+    .section-title {
+        font-size: 1.8em;
+    }
+
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+}
+/* --- НОВЫЕ СТИЛИ ДЛЯ ОБЕРТКИ СКРОЛЛИРУЕМОГО КОНТЕНТА --- */
+.scrollable-content-wrapper {
+    width: 100%;
+    height: 100vh; 
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    overflow-y: auto; /* Разрешаем вертикальную прокрутку */
+    overflow-x: hidden; /* Скрываем горизонтальную прокрутку */
+    
+    position: relative;
+    z-index: 1; 
+}
+
+/* --- СТИЛИЗАЦИЯ СКРОЛЛБАРА (для WebKit-браузеров: Chrome, Edge, Safari, Opera) --- */
+
+/* Общая ширина скроллбара */
+.scrollable-content-wrapper::-webkit-scrollbar {
+    width: 10px; /* Ширина вертикального скроллбара */
+    background-color: transparent; /* Делаем фон скроллбара прозрачным, чтобы был виден фон страницы */
+}
+
+/* Трек (фон) скроллбара */
+.scrollable-content-wrapper::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.2); /* Темный полупрозрачный фон трека */
+    border-radius: 5px; /* Скругленные углы для трека */
+}
+
+/* Ползунок (thumb) скроллбара */
+.scrollable-content-wrapper::-webkit-scrollbar-thumb {
+    background-color: #6246ea; /* Основной цвет скроллбара, соответствующий вашей теме */
+    border-radius: 5px; /* Скругленные углы для ползунка */
+    border: 1px solid #4a33b8; /* Чуть темнее рамка для объема */
+}
+
+/* При наведении на ползунок */
+.scrollable-content-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #7a5cff; /* Цвет ползунка при наведении */
+}
+
+/* Уголок скроллбара (где встречаются горизонтальный и вертикальный скроллбары) */
+.scrollable-content-wrapper::-webkit-scrollbar-corner {
+    background-color: transparent; /* Прозрачный или темный */
+}
+
+
+/* --- Ваши существующие стили header, tools-section, tool-card и т.д. --- */
+/* Все остальные стили ниже остаются без изменений */
+
+.header {
+    padding: 2rem;
+    text-align: center;
+}
+
+/* ... (остальной ваш CSS-код без изменений) ... */
+/* ... (остальной ваш CSS-код без изменений) ... */
+/* ... (остальной ваш CSS-код без изменений) ... */
+
+/* ... (остальной ваш CSS-код без изменений) ... */
+/* ... (остальной ваш CSS-код без изменений) ... */
+/* ... (остальной ваш CSS-код без изменений) ... */
+
+/* ... (остальной ваш CSS-код без изменений) ... */
+/* main-menu.css */
+
+/* Основные стили для страницы */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif; /* Современный шрифт */
+    background: linear-gradient(145deg, #0d1b2a, #1b263b); /* Темный, глубокий градиентный фон */
+    color: #e0e1dd; /* Светлый цвет текста для контраста */
+    min-height: 100vh; /* Минимальная высота, чтобы градиент покрывал весь экран */
+    display: flex;
+    flex-direction: column; /* Для выравнивания контента, если нужно */
+    align-items: center; /* Центрирование по горизонтали */
+    justify-content: center; /* Центрирование по вертикали, если контент не занимает всю высоту */
+    overflow-x: hidden; /* Скрывает горизонтальную прокрутку */
+}
+
+/* Контейнер для содержимого страницы */
+.container {
+    max-width: 800px; /* Максимальная ширина содержимого */
+    margin: 0 auto; /* Центрирование контейнера */
+    padding: 2rem; /* Внутренние отступы */
+    width: 100%; /* Занимает всю доступную ширину */
+    box-sizing: border-box; /* Учитывает padding в ширине */
+}
+
+/* Заголовок страницы */
+header h1 {
+    font-size: 2.5rem; /* Большой размер заголовка */
+    text-align: center;
+    color: #ffd700; /* Яркий золотистый цвет */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); /* Небольшая тень для свечения */
+    margin-bottom: 2rem; /* Отступ снизу */
+}
+
+/* Стили для панелей (например, турнирной и правил) */
+.tournament-panel,
+.rules {
+    background: rgba(255, 255, 255, 0.08); /* Чуть более заметный полупрозрачный фон */
+    backdrop-filter: blur(12px); /* Усиленное размытие */
+    border-radius: 18px; /* Более скругленные углы */
+    padding: 2rem; /* Увеличенные внутренние отступы */
+    margin: 2rem 0; /* Отступы между панелями */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.25), 0 0 30px rgba(0, 255, 255, 0.15); /* Более выраженное свечение */
+    border: 1px solid rgba(0, 255, 255, 0.3); /* Легкая рамка */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавные переходы */
+}
+
+.tournament-panel:hover,
+.rules:hover {
+    transform: translateY(-5px); /* Легкий подъем при наведении */
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.2); /* Усиленная тень */
+}
+
+/* Заголовки внутри панелей */
+.tournament-panel h2,
+.rules h2 {
+    color: #00e5e5; /* Яркий акцентный цвет */
+    font-size: 1.8rem;
+    margin-top: 0;
+    border-bottom: 2px solid #00e5e5; /* Подчеркивание */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Стили для форм-элементов */
+label, select, button {
+    display: block; /* Каждый элемент на новой строке */
+    margin: 1rem 0 0.8rem; /* Отступы */
+    color: #a7c5eb; /* Цвет текста для label */
+}
+
+select {
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px; /* Более скругленные углы */
+    border: 2px solid #00b4d8; /* Рамка в цвет кнопки */
+    font-size: 1.1rem;
+    background-color: #1a2333; /* Темный фон */
+    color: #fff;
+    appearance: none; /* Скрывает стандартную стрелку выпадающего списка */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300b4d8%22%20d%3D%22M287%20172.9L146.4%2032.3c-2.3-2.3-5.3-3.5-8.4-3.5s-6.1%201.2-8.4%203.5L5.4%20172.9c-4.7%204.7-4.7%2012.3%200%2017%202.3%202.3%205.3%203.5%208.4%203.5s6.1-1.2%208.4-3.5l124%20124c2.3%202.3%205.3%203.5%208.4%203.5s6.1-1.2%208.4-3.5l124-124c4.7-4.7%204.7-12.3%200-17z%22%2F%3E%3C%2Fsvg%3E'); /* Кастомная стрелка */
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 1.2em auto;
+    cursor: pointer;
+}
+
+button {
+    padding: 0.8rem 1.5rem; /* Увеличенные отступы кнопки */
+    border-radius: 10px; /* Более скругленные углы */
+    border: none;
+    font-size: 1.1rem;
+    background: #00b4d8; /* Голубой цвет */
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 180, 216, 0.4); /* Тень для кнопки */
+}
+
+button:hover {
+    background: #0096c7; /* Темнее голубой при наведении */
+    transform: translateY(-2px); /* Легкий подъем */
+    box-shadow: 0 6px 15px rgba(0, 180, 216, 0.6); /* Усиленная тень */
+}
+
+/* Стили для списка правил (или любого неупорядоченного списка) */
+ul {
+    list-style: none; /* Убираем стандартные маркеры */
+    padding-left: 0; /* Убираем стандартный отступ */
+}
+
+ul li {
+    margin-bottom: 0.8rem; /* Отступ между пунктами списка */
+    padding-left: 1.5rem; /* Отступ для кастомного маркера */
+    position: relative;
+    line-height: 1.6;
+}
+
+ul li::before {
+    content: '• '; /* Кастомный маркер */
+    color: #00ffea; /* Неоновый голубой цвет маркера */
+    font-size: 1.5em; /* Размер маркера */
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Стили для таблицы лидеров */
+.styled-leaderboard {
+    width: 100%;
+    border-collapse: collapse; /* Схлопываем границы ячеек */
+    background: #1a2333; /* Темный фон таблицы */
+    border-radius: 12px;
+    overflow: hidden; /* Скрывает содержимое, выходящее за границы скругленных углов */
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4); /* Тень таблицы */
+    margin-top: 2rem; /* Отступ сверху */
+}
+
+.styled-leaderboard thead {
+    background: linear-gradient(to right, #2a3248, #3b4255); /* Градиентный заголовок таблицы */
+    border-bottom: 2px solid #00e5e5; /* Разделитель под заголовком */
+}
+
+.styled-leaderboard th, .styled-leaderboard td {
+    padding: 14px 18px; /* Увеличенные отступы в ячейках */
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Разделители строк */
+}
+
+.styled-leaderboard tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.02); /* Чередующиеся строки */
+}
+
+.styled-leaderboard tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.styled-leaderboard tbody tr:nth-child(-n+15) {
+    background: rgba(255, 215, 0, 0.08); /* Более легкая подсветка ТОП-15 */
+    font-weight: bold;
+    color: #ffcc66; /* Золотистый текст для ТОП-15 */
+}
+
+.styled-leaderboard th {
+    font-weight: bold;
+    color: #ffcc66; /* Золотистый цвет заголовков столбцов */
+    font-size: 1.1rem;
+    text-transform: uppercase; /* Верхний регистр для заголовков */
+    letter-spacing: 0.05em; /* Небольшой межбуквенный интервал */
+}
+
+.styled-leaderboard td {
+    font-size: 1rem;
+}
+
+.styled-leaderboard tbody tr:hover {
+    background: rgba(255, 255, 255, 0.1); /* Подсветка строки при наведении */
+    transform: scale(1.01); /* Легкое увеличение при наведении */
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+/* Стили для кнопки "Назад в меню" или аналогичной */
+.menu-button {
+    background-color: #ffcc66; /* Золотистая кнопка */
+    color: #000;
+    border: none;
+    padding: 12px 22px; /* Увеличенные отступы */
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 2rem; /* Отступ сверху */
+    display: inline-block; /* Чтобы можно было применять margin-top */
+    text-decoration: none; /* Для ссылок, которые выглядят как кнопки */
+}
+
+.menu-button:hover {
+    background-color: #e6b850; /* Темнее золотистая при наведении */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 204, 102, 0.6);
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .tournament-panel,
+    .rules {
+        padding: 1.2rem;
+        margin: 1.5rem 0;
+    }
+
+    .tournament-panel h2,
+    .rules h2 {
+        font-size: 1.5rem;
+    }
+
+    .styled-leaderboard th, .styled-leaderboard td {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+}

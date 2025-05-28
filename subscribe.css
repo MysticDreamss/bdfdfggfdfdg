@@ -1,0 +1,383 @@
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  text-align: center;
+  position: relative; /* чтобы кнопка могла быть в нём */
+}
+
+.header {
+  font-size: 3.5rem;
+  font-weight: 1000;
+  text-align: center;
+  margin: 0;
+  color: var(--badge-color);
+}
+
+
+.logo-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0; /* Убери margin-top: 100px */
+  filter: drop-shadow(0 0 8px rgba(40, 199, 111, 0.5));
+}
+
+
+/* Центрирование body и карточек (если нужно) */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(45deg, #0c0e1a, #1a1d33);
+  background-size: 400% 400%;
+  animation: gradientAnimation 20s ease infinite;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ← центрирует по горизонтали */
+}
+
+
+/* ===================== ТЕМЫ ===================== */
+:root {
+  --bg-color: #0f172a;
+--card-bg: linear-gradient(135deg, #1e293b 0%, #324766 40%, #1e293b 100%);
+  --text-color: #ffffff;
+  --accent: linear-gradient(135deg, #6246ea 0%, #836fff 50%, #a78bfa 100%);
+  --price-color: #28c76f;
+  --badge-bg: #2e355a;
+  --badge-color: #9fa8da;
+
+  --bg-gradient: linear-gradient(45deg, #0c0e1a, #1a1d33, #0c0e1a, #1a1d33);
+  --blink-color: rgba(139, 233, 253, 0.8);
+}
+
+[data-theme="light"] {
+  --bg-color: #f7f9fc;
+--card-bg: linear-gradient(135deg, #ffffff 0%, #e7f0f8 40%, #ffffff 100%);
+  --text-color: #1e1e2f;
+--accent: linear-gradient(135deg, #1fe2c2 0%, #00f0ff 50%, #84e3df 100%);
+  --price-color: #2e7d32;
+  --badge-bg: #e2e5fb;
+  --badge-color: #4a4a6a;
+
+  --bg-gradient: linear-gradient(45deg, #ffffff, #f0f4ff, #ffffff, #f0f4ff);
+  --blink-color: rgba(100, 149, 237, 0.6);
+}
+
+[data-theme="neon"] {
+  --bg-color: #0a0a23;
+--card-bg: linear-gradient(120deg, #9d50bb 0%, #6e48aa 40%, #e45e74 80%, #cda1aa 100%);
+  --text-color: #e0e0ff;
+ --accent: linear-gradient(135deg, #f978df 0%, #c678dd 100%);
+  --price-color: #00ffaa;
+  --badge-bg: #300050;
+  --badge-color: #ffccff;
+
+  --bg-gradient: linear-gradient(45deg, #120029, #0d0128, #1a003a, #110027);
+  --blink-color: rgba(255, 0, 204, 0.4);
+}
+
+/* ===================== ОСНОВА ===================== */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  background-size: 400% 400%;
+  color: var(--text-color);
+  opacity: 0;
+  animation: gradientAnimation 20s ease infinite;
+  transition: opacity 0.4s ease-in;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+
+body.loaded {
+  opacity: 1;
+}
+
+
+
+
+.plan-container {
+  margin-top: 80px;
+  width: 100%; /* растягиваем на всю ширину */
+  display: flex;
+  flex-direction: column;
+  gap: 60px; /* отступ между карточками */
+  padding: 0 20px 80px;
+}
+
+
+.plan-card:not(:last-child) {
+  margin-bottom: 60px;
+}
+
+
+.plan-card {
+  background: var(--card-bg);
+  background-size: 400% 400%; /* добавлено */
+  animation: cardGradientMove 8s ease infinite; /* добавлено */
+
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 1000px;
+  box-shadow: 0 0 20px rgba(122, 92, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.plan-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(122, 92, 255, 0.3);
+}
+
+.plan-header {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.plan-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--price-color);
+}
+
+.badge-currency {
+  background: var(--badge-bg);
+  color: var(--badge-color);
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  margin-left: 8px;
+}
+
+.plan-details ul {
+  padding-left: 1.2rem;
+  list-style-type: "• ";
+  color: var(--badge-color);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.subscribe-btn {
+  margin-top: 20px;
+  background: var(--accent);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.subscribe-btn:hover {
+  background: #7a5cff;
+  transform: scale(1.03);
+}
+
+.highlight {
+  border: 2px solid #ffc107;
+}
+
+.badge-popular {
+  background: #ef9425;
+  color: #000;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-left: 12px;
+  font-weight: 600;
+}
+
+.badge-premium {
+  background: #ffc107;
+  color: #000;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-left: 12px;
+  font-weight: 600;
+}
+
+/* ===================== КНОПКА СМЕНЫ ТЕМЫ ===================== */
+.theme-switcher {
+  position: fixed;
+  top: 10px; /* было 20px */
+  right: 20px;
+  z-index: 999;
+}
+
+.theme-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.theme-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent), 0 0 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+}
+
+.theme-icon-wrapper:hover {
+  transform: rotate(10deg) scale(1.1);
+  box-shadow: 0 0 16px var(--accent), 0 0 32px var(--accent);
+}
+
+.theme-icon-wrapper svg {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.theme-icon-wrapper:hover svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 4px var(--accent)) drop-shadow(0 0 8px var(--accent));
+}
+
+[data-theme="neon"] .theme-icon-wrapper {
+  animation: pulseAccent 1.5s infinite ease-in-out;
+  box-shadow: 0 0 10px var(--accent), 0 0 20px rgba(255, 0, 204, 0.3);
+}
+
+@keyframes pulseAccent {
+  0% {
+    box-shadow: 0 0 6px var(--accent), 0 0 14px var(--accent);
+  }
+  100% {
+    box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent);
+  }
+}
+
+/* ===================== БЛИКИ ===================== */
+#blinks-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.blink {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, var(--blink-color) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInOutBlink {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/* ===================== АНИМАЦИЯ ФОНА ===================== */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===================== АДАПТИВ ===================== */
+@media (max-width: 600px) {
+  .plan-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .subscribe-btn {
+    width: 100%;
+  }
+}
+
+/* АНИМАЦИЯ */
+
+@keyframes cardGradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* Основной контейнер-ссылка */
+.home-button {
+  position: fixed;        /* Кнопка фиксирована на экране */
+  top: 150px;             /* Отступ сверху */
+  right: 150px;           /* Отступ справа */
+  z-index: 1000;          /* Поверх всех элементов */
+  text-decoration: none;  /* Убираем подчёркивание у ссылки */
+}
+
+/* Обёртка для иконки — фон кнопки */
+.home-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%; /* Делаем круг */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(145deg, rgba(14, 22, 43, 0.85), rgba(30, 58, 138, 0.85)); /* Глянцево-синий фон */
+  backdrop-filter: blur(8px); /* Стеклянный эффект */
+  -webkit-backdrop-filter: blur(8px); /* Для Safari */
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),           /* Внешняя тень */
+    inset 0 1px 4px rgba(255, 255, 255, 0.1); /* Внутренний блеск */
+
+  transition: 
+    transform 0.2s ease, 
+    box-shadow 0.3s ease; /* Плавное наведение */
+}
+
+/* Hover-эффект при наведении */
+.home-icon-wrapper:hover {
+  transform: scale(1.08); /* Небольшое увеличение */
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.5),
+    inset 0 2px 6px rgba(255, 255, 255, 0.15); /* Усиленный блеск */
+}

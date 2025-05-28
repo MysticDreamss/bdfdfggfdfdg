@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Музыкальный плеер</title>
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+      font-family: sans-serif;
+    }
+
+    .music-widget {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 10px;
+      background: rgba(30, 41, 59, 0.9);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 0 10px rgba(122, 92, 255, 0.4);
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+    }
+
+    input[type="range"] {
+      width: 100px;
+    }
+
+    ul {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="music-widget">
+    <button id="play-pause" aria-label="Play/Pause">
+      <span class="icon icon-play">
+        <!-- ▶️ Play -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
+        </svg>
+      </span>
+      <span class="icon icon-pause" style="display: none;">
+        <!-- ⏸️ Pause -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+      </span>
+    </button>
+
+    <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" />
+    <audio id="audio" src="Slxughter Fragment (Slowed).mp3"></audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playPauseBtn = document.getElementById('play-pause');
+    const iconPlay = playPauseBtn.querySelector('.icon-play');
+    const iconPause = playPauseBtn.querySelector('.icon-pause');
+    const volumeSlider = document.getElementById('volume');
+
+    function updateIcons() {
+      if (audio.paused) {
+        iconPlay.style.display = 'inline-block';
+        iconPause.style.display = 'none';
+      } else {
+        iconPlay.style.display = 'none';
+        iconPause.style.display = 'inline-block';
+      }
+    }
+
+    playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+      updateIcons();
+    });
+
+    volumeSlider.addEventListener('input', () => {
+      audio.volume = volumeSlider.value;
+    });
+
+    // Запускаем при загрузке
+    window.addEventListener('DOMContentLoaded', () => {
+      audio.volume = volumeSlider.value;
+      updateIcons();
+    });
+  </script>
+</body>
+</html>

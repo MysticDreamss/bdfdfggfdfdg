@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register Page</title>
+
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="login.css">
+
+    <!-- Boxicons для иконок -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container" id="container">
+        <!-- Форма регистрации -->
+        <div class="form-container sign-up">
+            <form>
+                <h1>Создать аккаунт</h1>
+                <div class="social-icons">
+                    <a href="#" class="icons"><i class='bx bxl-google'></i></a>
+                    <a href="#" class="icons"><i class='bx bxl-github'></i></a>
+
+                </div>
+                <span>Зарегистрироваться с E-mail</span>
+                <input type="text" placeholder="Имя">
+                <input type="email" placeholder="Введите E-mail">
+                <input type="password" placeholder="Введите пароль">
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+        </div>
+
+        <!-- Форма входа -->
+        <div class="form-container sign-in">
+            <form>
+                <h1>Вход</h1>
+                <div class="social-icons">
+                    <a href="#" class="icons"><i class='bx bxl-google'></i></a>
+                    <a href="#" class="icons"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" class="icons"><i class='bx bxl-github'></i></a>
+                    <a href="#" class="icons"><i class='bx bxl-linkedin'></i></a>
+                </div>
+                <span>Войти с E-mail и паролем</span>
+                <input type="email" placeholder="Введите E-mail">
+                <input type="password" placeholder="Введите пароль">
+                <a href="#">Забыли пароль?</a>
+                <button type="submit">Войти</button>
+
+                <!-- Кнопка перехода на главную страницу -->
+                <a href="Mainpagemenu.html" class="go-index-btn">Перейти на главную</a>
+            </form>
+        </div>
+
+        <!-- Панели переключения между формами -->
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Добро пожаловать</h1>
+                    <p>Войдите с ID и паролем</p>
+                    <button class="hidden" id="login">Войти</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Welcome back, Sir!</h1>
+                    <p>CropLogix Login</p>
+                    <button class="hidden" id="register">Зарегистрироваться</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение JS -->
+    <script src="login.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ферма кейсов</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="blinks-container"></div>
+
+  <div class="button-container">
+    <!-- Вход -->
+    <div class="tooltip">
+      <button class="glass-button" onclick="window.location.href='!login.html'">
+        <i data-lucide="log-in"></i>
+      </button>
+      <div class="tooltip-text">Войти</div>
+    </div>
+
+    <!-- Меню -->
+    <div class="tooltip">
+      <button class="glass-button" onclick="window.location.href='Mainpagemenu.html'">
+        <i data-lucide="menu"></i>
+      </button>
+      <div class="tooltip-text">Меню</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="top-right-buttons">
+      <!-- Сохранить -->
+      <div class="tooltip">
+        <button class="glass-button" onclick="exportData()">
+          <i data-lucide="download"></i>
+        </button>
+        <div class="tooltip-text">Сохранить</div>
+      </div>
+
+      <!-- Загрузить -->
+      <div class="tooltip">
+        <label class="glass-button" for="importInput" style="cursor: pointer;">
+          <i data-lucide="upload"></i>
+        </label>
+        <div class="tooltip-text">Загрузить</div>
+      </div>
+      <input type="file" id="importInput" onchange="importData()" style="display: none;">
+
+      <!-- Профиль -->
+      <div class="tooltip">
+        <button class="glass-button" onclick="window.location.href='profile.html'">
+          <i data-lucide="user"></i>
+        </button>
+        <div class="tooltip-text">Профиль</div>
+      </div>
+    </div>
+
+    <!-- Панель выбора -->
+    <div class="top-bar">
+      <div class="select-group">
+        <label>Аккаунт</label>
+        <select id="accountSelect"></select>
+        <button id="addAccount">+</button>
+      </div>
+
+      <div class="select-group">
+        <label>Кейс</label>
+        <select id="caseSelect"></select>
+      </div>
+
+      <div class="select-group">
+        <label>Выбор недели</label>
+        <select id="weekSelect"></select>
+      </div>
+
+      <div class="select-group">
+        <button id="addEntry" class="animated-button">Добавить</button>
+      </div>
+
+      <div class="summary">
+        <p>Общее число кейсов: <span id="totalCases">0</span></p>
+        <p>Деньги: <span id="totalMoney">0</span></p>
+      </div>
+    </div>
+
+    <!-- Данные недели -->
+    <div class="weekly-data">
+      <div class="week-header">
+        <div><select id="viewWeekSelect"></select></div>
+        <div>Число кейсов: <span id="weekCases">0</span> | Деньги: <span id="weekMoney">0</span></div>
+      </div>
+
+      <div class="table">
+        <div class="row header">
+          <div>Аккаунты</div>
+          <div>Выпавшие кейсы</div>
+          <div>Цена</div>
+          <div>Удалить</div>
+        </div>
+        <div id="entriesTable"></div>
+      </div>
+
+      <div class="cards" id="accountCards"></div>
+    </div>
+  </div>
+
+  <!-- Скрипты -->
+  <script>
+    lucide.createIcons();
+
+    function exportData() {
+      const exportObj = {
+        accounts: JSON.parse(localStorage.getItem("accounts") || "[]"),
+        caseData: JSON.parse(localStorage.getItem("caseData") || "{}")
+      };
+
+      const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "case-farm-data.json";
+      a.click();
+
+      URL.revokeObjectURL(url);
+    }
+
+    function importData() {
+      const input = document.getElementById("importInput");
+      const file = input.files[0];
+
+      if (!file) {
+        alert("Выберите файл!");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (!imported.accounts || !imported.caseData) {
+            alert("Файл не содержит нужных данных!");
+            return;
+          }
+
+          localStorage.setItem("accounts", JSON.stringify(imported.accounts));
+          localStorage.setItem("caseData", JSON.stringify(imported.caseData));
+          location.reload();
+        } catch (err) {
+          alert("Ошибка при чтении файла: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

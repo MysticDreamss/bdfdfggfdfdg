@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Лучшие инструменты для фермеров Steam</title>
+    <link rel="stylesheet" href="steam-tools.css" />             <link rel="stylesheet" href="background-animation.css" />  
+ <style>
+    .icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: white;
+    }
+  </style>
+</head>
+<body>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Кнопка-ссылка, ведущая на Mainpagemenu.html -->
+<a href="Mainpagemenu.html" class="home-button" title="На главную страницу">
+  <!-- Обёртка — создаёт глянцевый круглый фон -->
+  <div class="home-icon-wrapper">
+    <!-- SVG иконка "домика" -->
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 9L12 2L21 9V20C21 20.55 20.55 21 20 21H4C3.45 21 3 20.55 3 20V9Z" stroke="#ffffff" stroke-width="2"/>
+      <path d="M9 21V12H15V21" stroke="#ffffff" stroke-width="2"/>
+    </svg>
+  </div>
+</a>   </a>
+    
+    <div id="blinks-container"></div>
+
+    <div class="scrollable-content-wrapper">
+
+        <header class="header">
+            <div class="title-block">
+                <h1 class="main-title">Лучшие инструменты для фермеров Steam</h1>
+            </div>
+            <div class="controls-wrapper">
+                <div class="controls top-controls">
+                    <input type="text" id="searchInput" placeholder="Поиск инструмента..." />
+                    <button class="search-btn" onclick="filterTools()">Найти</button>
+                </div>
+                <div class="controls bottom-controls">
+                    <select id="categorySelect">
+                        <option value="all">Выбрать категорию</option>
+                        <option value="farm">Фарм карточек</option>
+                        <option value="hours">Накрутка часов</option>
+                        <option value="auth">Авторизация</option>
+                        <option value="accounts">Менеджер аккаунтов</option>
+                        <option value="network">Смена маршрута</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <section class="tools-section">
+            <div class="tools-header">
+                <h2 class="section-title">Инструменты</h2>
+                <p class="section-subtext">Раздел «Инструменты для фермеров» — это центр управления всем необходимым арсеналом для эффективного фарма кейсов. Здесь собраны проверенные утилиты для новичков и опытных пользователей: автоматизация, аналитика, безопасность, учет, калькуляторы, планировщики, парсеры, бэкапы и многое другое.
+
+                Инструменты удобно разделены по категориям с подробным описанием, чтобы быстро выбрать нужное. Ты сможешь отслеживать активность аккаунтов, планировать запуск скриптов, собирать статистику, рассчитывать доход и легко импортировать/экспортировать данные.
+
+                Каждый инструмент имеет понятный интерфейс и справку, многие интегрированы друг с другом для удобства. Раздел постоянно обновляется, добавляя новые функции и скрипты.
+
+                Если хочешь фармить с умом и максимальной отдачей, этот раздел станет твоим надежным помощником, позволяя превратить рутину в эффективную систему.
+                </p>
+            </div>
+            <div class="tools-grid" id="toolsGrid">
+
+               <div class="tool-card" data-category="farm">
+  <div class="light-effect"></div>
+  <div class="card-body">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+           viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M5 19V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14l-7-3-7 3z"/>
+      </svg>
+    </div>
+    <h3>ArchiSteamFarm (ASF)</h3>
+    <p>Бот для автоматического фарма карточек Steam. Позволяет запускать фарм на нескольких аккаунтах одновременно, работает в фоновом режиме и минимизирует ручную работу. Поддерживает автоматическое подтверждение трейдов и удалённое управление.</p>
+    <div class="tag">farm</div>
+  </div>
+  <div class="buttons">
+    <a href="https://github.com/JustArchiNET/ArchiSteamFarm/wiki" target="_blank">Подробное</a>
+    <a href="https://github.com/JustArchiNET/ArchiSteamFarm" target="_blank">Перейти на сайт</a>
+  </div>
+</div>
+
+
+                <div class="tool-card" data-category="hours">
+                    <div class="light-effect"></div>
+                    <div class="card-body">
+                       <div class="icon">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+       viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 6v6l4 2m6-4a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+</div>
+
+                        <h3>FreeHourBoost (FHB)</h3>
+                        <p>Инструмент для накрутки игрового времени в Steam. Позволяет автоматически увеличивать количество часов, проведённых в игре, создавая видимость длительной активности без реального геймплея.</p>
+                        <div class="tag">hours</div>
+                    </div>
+                    <div class="buttons">
+                        <a href="https://github.com/JonasNilson/steam-hour-booster/wiki" target="_blank">Подробное</a>
+                        <a href="https://github.com/JonasNilson/steam-hour-booster" target="_blank">Перейти на сайт</a>
+                    </div>
+                </div>
+
+                <div class="tool-card" data-category="auth">
+                    <div class="light-effect"></div>
+                    <div class="card-body">
+                        <div class="icon">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+       viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M16.5 10.5v-3a4.5 4.5 0 00-9 0v3m-1.5 0A1.5 1.5 0 004.5 12v7.5a1.5 1.5 0 001.5 1.5h12a1.5 1.5 0 001.5-1.5V12a1.5 1.5 0 00-1.5-1.5h-12z" />
+  </svg>
+</div>
+
+                        <h3>SteamDesktopAuthenticator (SDA)</h3>
+                        <p>Программа для генерации кодов Steam Guard на компьютере. Позволяет быстро получать временные коды для двухфакторной аутентификации Steam без необходимости использовать мобильное приложение.</p>
+                        <div class="tag">auth</div>
+                    </div>
+                    <div class="buttons">
+                        <a href="https://github.com/Jessecar96/SteamDesktopAuthenticator/wiki" target="_blank">Подробное</a>
+                        <a href="https://github.com/Jessecar96/SteamDesktopAuthenticator" target="_blank">Перейти на сайт</a>
+                    </div>
+                </div>
+
+                <div class="tool-card" data-category="accounts">
+                    <div class="light-effect"></div>
+                    <div class="card-body">
+                        <div class="icon">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+       viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.25a7.5 7.5 0 0114.998 0v.25H4.5v-.25z" />
+  </svg>
+</div>
+
+                        <h3>SteamAccountManager (SAM)</h3>
+                        <p>Утилита для быстрого и удобного входа в несколько аккаунтов Steam. Позволяет быстро переключаться между аккаунтами без повторного ввода логина и пароля, экономя время и упрощая управление.</p>
+                        <div class="tag">accounts</div>
+                    </div>
+                    <div class="buttons">
+                        <a href="https://github.com/revadike/Steam-Account-Manager/wiki" target="_blank">Подробное</a>
+                        <a href="https://github.com/revadike/Steam-Account-Manager" target="_blank">Перейти на сайт</a>
+                    </div>
+                </div>
+
+                <div class="tool-card" data-category="network">
+                    <div class="light-effect"></div>
+                    <div class="card-body">
+                        <div class="icon">
+ <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.288 15.038a5.25 5.25 0 0 1 7.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 0 1 1.06 0Z" />
+</svg>
+
+
+
+</div>
+                        <h3>SteamRouteTool (SRT)</h3>
+                        <p>Инструмент, который изменяет маршрут подключения к серверам Steam, позволяя ускорить процесс поиска совместных игр. Это помогает быстрее создавать игровые сессии на нескольких аккаунтах, что важно для эффективного фарма кейсов и автоматизации игрового времени.</p>
+                        <div class="tag">network</div>
+                    </div>
+                    <div class="buttons">
+                        <a href="https://github.com/FiftyTwo/SteamRouteTool/wiki" target="_blank">Подробное</a>
+                        <a href="https://github.com/FiftyTwo/SteamRouteTool" target="_blank">Перейти на сайт</a>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                  <div class="light-effect"></div>
+                    <div class="card-body">
+                        <div class="icon">
+<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+<path fill="#f57c00" fill-rule="evenodd" d="M39.77,29.767c-1.057-0.551-1.394-0.738-1.943-1.146 C36.111,27.345,35,25.302,35,23c0-2.416,1.224-4.546,3.086-5.805c0.116-0.078,1.317-0.82,1.809-1.156C41.7,14.808,43,12.844,43,10.5 C43,6.91,40.09,4,36.5,4c-2.151,0-4.053,1.05-5.236,2.66l-0.006-0.005C29.656,9,27.313,11,23.5,11c-2.375,0-3.959-0.224-6.698-2.399 c0,0-0.007,0.005-0.009,0.007C16.292,8.231,15.675,8,15,8c-1.657,0-3,1.343-3,3c0,1.479,1,2.771,1,6c0,8-6.213,11.256-6.909,11.699 C4.834,29.497,4,30.901,4,32.5C4,34.985,6.015,37,8.5,37c0.412,0,0.811-0.055,1.19-0.159C11.598,36.319,13,35,17,35 c8,0,12.887,5.551,14.312,6.916C32.659,43.207,34.487,44,36.5,44c4.142,0,7.5-3.358,7.5-7.5C44,33.534,42.235,31.053,39.77,29.767z" clip-rule="evenodd"></path><path fill="#fff" fill-rule="evenodd" d="M22.75,17C19.574,17,17,19.91,17,23.5s2.574,6.5,5.75,6.5 s5.75-2.91,5.75-6.5S25.926,17,22.75,17z M23.5,27.5c-1.933,0-3.5-1.791-3.5-4c0-2.209,1.567-4,3.5-4s3.5,1.791,3.5,4 C27,25.709,25.433,27.5,23.5,27.5z" clip-rule="evenodd"></path><path fill="#fff" fill-rule="evenodd" d="M28.5,17c-0.828,0-1.5,0.672-1.5,1.5c0,0.067,0,1.567,0,1.625 v7.125c0,0,0,1.073,0,1.25c0,0.828,0.672,1.5,1.5,1.5s1.5-0.672,1.5-1.5c0-0.648,0-9.437,0-10C30,17.672,29.328,17,28.5,17z" clip-rule="evenodd"></path>
+</svg>
+</div>
+
+                        <h3>Avast Antivirus (AA)</h3>
+                        <p>Песочница Avast позволяет запускать несколько изолированных окон приложений одновременно. Это удобно для запуска нескольких аккаунтов Steam на одном ПК, чтобы играть между собой и фармить кейсы.</p>
+                        <div class="tag">security</div>
+                    </div>
+                    <div class="buttons">
+                        <a href="#">Перейти на сайт</a>
+                        <a href="#">Подробнее</a>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                  <div class="light-effect"></div>
+                    <div class="card-body">
+                       <div class="icon">
+ <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="3" />
+  <path d="M19.4 15a7.95 7.95 0 00.6-3 7.95 7.95 0 00-.6-3M4.6 9a7.95 7.95 0 00-.6 3 7.95 7.95 0 00.6 3M16 16l3 3M8 8L5 5" />
+</svg>
+
+</div>
+
+                        <h3>IdleMasterExtended (IME)</h3>
+                        <p>Это усовершенствованный инструмент для автоматического получения карточек Steam, позволяющий легко и безопасно собирать коллекционные предметы, пока вы занимаетесь другими делами.</p>
+                        <div class="tag">security</div>
+                    </div>
+                    <div class="buttons">
+                        <a href="#">Перейти на сайт</a>
+                        <a href="#">Подробнее</a>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                  <div class="light-effect"></div>
+                    <div class="card-body">
+                        <div class="icon">
+ <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+</svg>
+
+</div>
+
+                        <h3>SteamAccountSwicher (SAS)</h3>
+                        <p>Незаменимый инструмент для любого пользователя Steam, который управляет несколькими аккаунтами. Он позволяет мгновенно переключаться между вашими учётными записями Steam без необходимости каждый раз вводить логин и пароль. SAS значительно упрощает доступ к вашим игровым библиотекам.</p>
+                        <div class="tag">accounts</div>
+                    </div>
+                    <div class="buttons">
+                        <a href="#">Перейти на сайт</a>
+                        <a href="#">Подробнее</a>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                  <div class="light-effect"></div>
+                    <div class="card-body">
+                       <div class="icon">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="7" y="7" width="10" height="10" rx="2" ry="2"/>
+  <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/>
+  <path d="M12 11v2M11 12h2"/>
+</svg>
+
+</div>
+
+                        <h3>Battle Encoder Shirase (BES)</h3>
+                        <p>Утилита для ограничения использования CPU отдельными процессами. Она помогает предотвратить чрезмерную нагрузку на процессор от ресурсоёмких приложений или игр.</p>
+                        <div class="tag">security</div>
+                    </div>
+                    <div class="buttons">
+                        <a href="#">Перейти на сайт</a>
+                        <a href="#">Подробнее</a>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </section>
+    </div>
+    <script src="steam-tools.js"></script>
+    <script src="background-animation-tool.js"></script>
+</body>
+</html>
